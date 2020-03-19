@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.stt.smartmonitor.mapper.base.AlarmOrderMapper" >
+  <resultMap id="BaseResultMap" type="cn.stt.smartmonitor.entity.AlarmOrder" >
+    <id column="alarm_id" property="alarmId" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="send_status" property="sendStatus" jdbcType="INTEGER" />
+    <result column="send_result" property="sendResult" jdbcType="VARCHAR" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    alarm_id, order_no, send_status, send_result, order_status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from alarm_order
+    where alarm_id = #{alarmId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from alarm_order
+    where alarm_id = #{alarmId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.stt.smartmonitor.entity.AlarmOrder" >
+    insert into alarm_order (alarm_id, order_no, send_status, 
+      send_result, order_status, create_time, 
+      update_time)
+    values (#{alarmId,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{sendStatus,jdbcType=INTEGER}, 
+      #{sendResult,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.stt.smartmonitor.entity.AlarmOrder" >
+    insert into alarm_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="alarmId != null" >
+        alarm_id,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="sendStatus != null" >
+        send_status,
+      </if>
+      <if test="sendResult != null" >
+        send_result,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="alarmId != null" >
+        #{alarmId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sendStatus != null" >
+        #{sendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="sendResult != null" >
+        #{sendResult,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.stt.smartmonitor.entity.AlarmOrder" >
+    update alarm_order
+    <set >
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sendStatus != null" >
+        send_status = #{sendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="sendResult != null" >
+        send_result = #{sendResult,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where alarm_id = #{alarmId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.stt.smartmonitor.entity.AlarmOrder" >
+    update alarm_order
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      send_status = #{sendStatus,jdbcType=INTEGER},
+      send_result = #{sendResult,jdbcType=VARCHAR},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where alarm_id = #{alarmId,jdbcType=VARCHAR}
+  </update>
+</mapper>

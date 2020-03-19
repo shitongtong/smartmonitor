@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stt.smartmonitor.mapper.AlarmRulesMapperExt">
+  <resultMap id="BaseResultMap" type="cn.stt.smartmonitor.entity.AlarmRules">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="rule_name" jdbcType="VARCHAR" property="ruleName" />
+    <result column="res_type" jdbcType="INTEGER" property="resType" />
+    <result column="res_type_name" jdbcType="VARCHAR" property="resTypeName" />
+    <result column="eqp_type" jdbcType="INTEGER" property="eqpType" />
+    <result column="eqp_type_name" jdbcType="VARCHAR" property="eqpTypeName" />
+    <result column="performance_id" jdbcType="INTEGER" property="performanceId" />
+    <result column="performance_name" jdbcType="VARCHAR" property="performanceName" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="threshold_status" jdbcType="INTEGER" property="thresholdStatus" />
+    <result column="lower_threshold" jdbcType="INTEGER" property="lowerThreshold" />
+    <result column="threshold" jdbcType="INTEGER" property="threshold" />
+    <result column="alarm_level" jdbcType="INTEGER" property="alarmLevel" />
+    <result column="send_status" jdbcType="INTEGER" property="sendStatus" />
+    <result column="use_status" jdbcType="INTEGER" property="useStatus" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="recent_time" jdbcType="TIMESTAMP" property="recentTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="alarm_count" jdbcType="INTEGER" property="alarmCount" />
+    <result column="clear_count" jdbcType="INTEGER" property="clearCount" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, rule_name, res_type, res_type_name, eqp_type, eqp_type_name, performance_id, 
+    performance_name, item_name, threshold_status, lower_threshold, threshold, alarm_level, 
+    send_status, use_status, start_time, end_time, recent_time, description, alarm_count, 
+    clear_count, remark, sort, status, create_by, create_time, update_by, update_time
+  </sql>
+  <select id="findByItemName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from alarm_rules
+    where status=1 and item_name=#{itemName}
+  </select>
+</mapper>

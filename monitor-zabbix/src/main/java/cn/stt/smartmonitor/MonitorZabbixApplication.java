@@ -1,5 +1,6 @@
 package cn.stt.smartmonitor;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @Date 2020/3/10 15:57
  */
 @SpringBootApplication
+@MapperScan("cn.stt.smartmonitor.mapper")
 public class MonitorZabbixApplication implements WebMvcConfigurer {
     private static final Logger LOGGER = LoggerFactory.getLogger(MonitorZabbixApplication.class);
 

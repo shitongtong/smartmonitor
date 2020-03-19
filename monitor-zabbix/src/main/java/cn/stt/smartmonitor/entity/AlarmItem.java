@@ -5,13 +5,11 @@ import java.util.Date;
 public class AlarmItem {
     private Integer id;
 
-    private Integer alarmApplicationId;
+    private String applicationName;
 
     private String itemKey;
 
     private String itemName;
-
-    private String itemType;
 
     private String remark;
 
@@ -35,12 +33,12 @@ public class AlarmItem {
         this.id = id;
     }
 
-    public Integer getAlarmApplicationId() {
-        return alarmApplicationId;
+    public String getApplicationName() {
+        return applicationName;
     }
 
-    public void setAlarmApplicationId(Integer alarmApplicationId) {
-        this.alarmApplicationId = alarmApplicationId;
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName == null ? null : applicationName.trim();
     }
 
     public String getItemKey() {
@@ -57,14 +55,6 @@ public class AlarmItem {
 
     public void setItemName(String itemName) {
         this.itemName = itemName == null ? null : itemName.trim();
-    }
-
-    public String getItemType() {
-        return itemType;
-    }
-
-    public void setItemType(String itemType) {
-        this.itemType = itemType == null ? null : itemType.trim();
     }
 
     public String getRemark() {

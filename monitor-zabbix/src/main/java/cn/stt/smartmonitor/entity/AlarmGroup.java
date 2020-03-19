@@ -7,8 +7,6 @@ public class AlarmGroup {
 
     private String groupName;
 
-    private String groupId;
-
     private String remark;
 
     private Integer sort;
@@ -37,14 +35,6 @@ public class AlarmGroup {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName == null ? null : groupName.trim();
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId == null ? null : groupId.trim();
     }
 
     public String getRemark() {

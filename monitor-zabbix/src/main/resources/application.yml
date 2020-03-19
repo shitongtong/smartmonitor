@@ -45,6 +45,11 @@ spring:
 
 zabbix-server:
   url: http://localhost/zabbix/api_jsonrpc.php
-  user: Admin
-  password: zabbix
+  user: xxx
+  password: xxx
+
+#自定义配置
+my:
+  dataHandUrl: http://localhost:20028/monitor-alarm/handleData
+
 

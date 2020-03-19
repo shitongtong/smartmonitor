@@ -1,14 +1,17 @@
 package cn.stt.smartmonitor.service.impl;
 
+import cn.stt.common.util.HttpUtil;
+import cn.stt.smartmonitor.config.YmlMyConfig;
 import cn.stt.smartmonitor.config.ZabbixServerConfig;
-import cn.stt.smartmonitor.dto.ItemPerformanceDto;
-import cn.stt.smartmonitor.entity.AlarmGroup;
+import cn.stt.smartmonitor.entity.AlarmItem;
 import cn.stt.smartmonitor.mapper.AlarmApplicationMapperExt;
 import cn.stt.smartmonitor.mapper.AlarmGroupMapperExt;
+import cn.stt.smartmonitor.mapper.AlarmItemMapperExt;
 import cn.stt.smartmonitor.request.ZabbixRequest;
 import cn.stt.smartmonitor.request.ZabbixRequestBuilder;
 import cn.stt.smartmonitor.service.MonitorZabbixService;
 import cn.stt.smartmonitor.util.ZabbixApiUtil;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +40,10 @@ public class MonitorZabbixServiceImpl implements MonitorZabbixService {
     private AlarmGroupMapperExt alarmGroupMapperExt;
     @Autowired
     private AlarmApplicationMapperExt alarmApplicationMapperExt;
+    @Autowired
+    private AlarmItemMapperExt alarmItemMapperExt;
+    @Autowired
+    private YmlMyConfig ymlMyConfig;
 
     @Override
     public void gatherData() {
@@ -46,34 +53,30 @@ public class MonitorZabbixServiceImpl implements MonitorZabbixService {
         boolean login = zabbixApiUtil.login(zabbixServerConfig.getUser(), zabbixServerConfig.getPassword());
         if (login) {
             //获取需要采集监控项主机所属的groupId
-            List<AlarmGroup> alarmGroupList = alarmGroupMapperExt.findAll();
-            for (AlarmGroup alarmGroup : alarmGroupList) {
-                String groupId = alarmGroup.getGroupId();
-                if (StringUtils.isBlank(groupId)) {
-                    //根据groupName获取groupId(方便适用各种不同环境)
-                    groupId = zabbixApiUtil.getGroupIdByName(alarmGroup.getGroupName());
-                }
-                if (StringUtils.isNotBlank(groupId)) {
-                    //通过groupId获取其下主机监控项最新数据
-                    getLatestItemDataByGroupId(alarmGroup.getId(), groupId);
-                } else {
-                    //groupId不存在，更新表
-                    alarmGroup.setRemark(alarmGroup + "|未发现其对应的groupId");
-                    alarmGroupMapperExt.updateByPrimaryKeySelective(alarmGroup);
-                }
+            List<String> groupNameList = alarmGroupMapperExt.findGroupList();
+            for (String groupName : groupNameList) {
+                handleLatestItemDataByGroupName(groupName);
             }
-
         }
     }
 
-    public JSONArray getLatestItemDataByGroupId(int alarmGroupId, String groupId) {
+    public void handleLatestItemDataByGroupName(String groupName) {
+        //根据groupName获取groupId
+        String groupId = zabbixApiUtil.getGroupIdByName(groupName);
+        if (StringUtils.isBlank(groupId)) {
+            log.info("该groupName[{}]在zabbix不存在!", groupName);
+            return;
+        }
         /*List<String> applicationNameList = new ArrayList<>();
         applicationNameList.add("CPU");
         applicationNameList.add("Filesystem /");
         applicationNameList.add("Filesystem /datastore");
         applicationNameList.add("Memory");*/
         //监控项名称applicationName过滤
-        List<String> applicationNameList = alarmApplicationMapperExt.findApplicationNameByAlarmGroupId(alarmGroupId);
+        List<String> applicationNameList = alarmApplicationMapperExt.findApplicationNameByGroupName(groupName);
+        if (applicationNameList == null || applicationNameList.size() == 0) {
+            return;
+        }
         JSONObject itemFilter = new JSONObject();
         itemFilter.put("name", applicationNameList);
         ZabbixRequest request = ZabbixRequestBuilder.newBuilder().method("application.get")
@@ -86,24 +89,44 @@ public class MonitorZabbixServiceImpl implements MonitorZabbixService {
                 .build();
         JSONObject response = zabbixApiUtil.call(request);
         log.info("application.get.response={}", response);
-        if (StringUtils.isNotBlank(response.getString("error"))) {
-            return null;
-        }else {
+        if (StringUtils.isBlank(response.getString("error"))) {
             JSONArray resultArray = response.getJSONArray("result");
             for (int i = 0; i < resultArray.size(); i++) {
-                ItemPerformanceDto dto = new ItemPerformanceDto();
-                Map<String, Object> performance = new HashMap<>();
-                JSONObject resultObj = resultArray.getJSONObject(0);
+                JSONObject resultObj = resultArray.getJSONObject(i);
                 JSONObject hostObj = resultObj.getJSONObject("host");
                 //将name配置成ip
                 String ip = hostObj.getString("name");
-                dto.setIp(ip);
+                String applicationName = resultObj.getString("name");
+                //获取过滤配置的指标项
+                List<AlarmItem> itemList = alarmItemMapperExt.findByApplicationName(applicationName);
                 //所有的指标项
                 JSONArray itemsArray = resultObj.getJSONArray("items");
-                //过滤只获取配置的指标项
-
+                for (int j = 0; j < itemsArray.size(); j++) {
+                    JSONObject itemObj = itemsArray.getJSONObject(j);
+                    String key = itemObj.getString("key_");
+                    String lastvalue = itemObj.getString("lastvalue");
+                    String units = itemObj.getString("units");
+                    for (AlarmItem alarmItem : itemList) {
+                        String itemKey = alarmItem.getItemKey();
+                        String itemName = alarmItem.getItemName();
+                        if (key.equals(itemKey)) {
+                            Map<String, String> map = new HashMap<>();
+                            map.put("ip", ip);
+                            map.put("name", itemName);
+                            map.put("value", lastvalue);
+                            map.put("units", units);
+                            String parameter = JSON.toJSONString(map);
+                            try {
+                                log.info("发送参数:{}", parameter);
+                                String result = HttpUtil.sendPost(ymlMyConfig.getDataHandUrl(), parameter);
+                                log.info("发送结果:{}", result);
+                            } catch (Exception e) {
+                                log.error("", e);
+                            }
+                        }
+                    }
+                }
             }
         }
-        return null;
     }
 }

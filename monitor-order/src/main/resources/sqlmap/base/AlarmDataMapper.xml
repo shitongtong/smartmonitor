@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.stt.smartmonitor.mapper.base.AlarmDataMapper" >
+  <resultMap id="BaseResultMap" type="cn.stt.smartmonitor.entity.AlarmData" >
+    <id column="alarm_id" property="alarmId" jdbcType="VARCHAR" />
+    <result column="clear_id" property="clearId" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="global_code" property="globalCode" jdbcType="VARCHAR" />
+    <result column="item_name" property="itemName" jdbcType="VARCHAR" />
+    <result column="res_type" property="resType" jdbcType="INTEGER" />
+    <result column="res_type_name" property="resTypeName" jdbcType="VARCHAR" />
+    <result column="eqp_type" property="eqpType" jdbcType="INTEGER" />
+    <result column="eqp_type_name" property="eqpTypeName" jdbcType="VARCHAR" />
+    <result column="fault_type" property="faultType" jdbcType="VARCHAR" />
+    <result column="cracking_type" property="crackingType" jdbcType="VARCHAR" />
+    <result column="alarm_status" property="alarmStatus" jdbcType="INTEGER" />
+    <result column="event_time" property="eventTime" jdbcType="TIMESTAMP" />
+    <result column="clear_time" property="clearTime" jdbcType="TIMESTAMP" />
+    <result column="alarm_type" property="alarmType" jdbcType="INTEGER" />
+    <result column="alarm_source" property="alarmSource" jdbcType="INTEGER" />
+    <result column="alarm_level" property="alarmLevel" jdbcType="INTEGER" />
+    <result column="alarm_title" property="alarmTitle" jdbcType="VARCHAR" />
+    <result column="alarm_title_type" property="alarmTitleType" jdbcType="INTEGER" />
+    <result column="alarm_text" property="alarmText" jdbcType="VARCHAR" />
+    <result column="alarm_text_type" property="alarmTextType" jdbcType="INTEGER" />
+    <result column="alarm_image" property="alarmImage" jdbcType="VARCHAR" />
+    <result column="facility_name" property="facilityName" jdbcType="VARCHAR" />
+    <result column="facility_frim" property="facilityFrim" jdbcType="VARCHAR" />
+    <result column="eqp_code" property="eqpCode" jdbcType="VARCHAR" />
+    <result column="asset_number" property="assetNumber" jdbcType="VARCHAR" />
+    <result column="police_id" property="policeId" jdbcType="INTEGER" />
+    <result column="police_station" property="policeStation" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="port_code" property="portCode" jdbcType="VARCHAR" />
+    <result column="diagnose_result" property="diagnoseResult" jdbcType="VARCHAR" />
+    <result column="plan_type" property="planType" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="ack_status" property="ackStatus" jdbcType="INTEGER" />
+    <result column="confirm_time" property="confirmTime" jdbcType="TIMESTAMP" />
+    <result column="confirm_user" property="confirmUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    alarm_id, clear_id, ip, global_code, item_name, res_type, res_type_name, eqp_type, 
+    eqp_type_name, fault_type, cracking_type, alarm_status, event_time, clear_time, alarm_type, 
+    alarm_source, alarm_level, alarm_title, alarm_title_type, alarm_text, alarm_text_type, 
+    alarm_image, facility_name, facility_frim, eqp_code, asset_number, police_id, police_station, 
+    location, mac, port_code, diagnose_result, plan_type, parent_id, ack_status, confirm_time, 
+    confirm_user, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from alarm_data
+    where alarm_id = #{alarmId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from alarm_data
+    where alarm_id = #{alarmId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.stt.smartmonitor.entity.AlarmData" >
+    insert into alarm_data (alarm_id, clear_id, ip, 
+      global_code, item_name, res_type, 
+      res_type_name, eqp_type, eqp_type_name, 
+      fault_type, cracking_type, alarm_status, 
+      event_time, clear_time, alarm_type, 
+      alarm_source, alarm_level, alarm_title, 
+      alarm_title_type, alarm_text, alarm_text_type, 
+      alarm_image, facility_name, facility_frim, 
+      eqp_code, asset_number, police_id, 
+      police_station, location, mac, 
+      port_code, diagnose_result, plan_type, 
+      parent_id, ack_status, confirm_time, 
+      confirm_user, create_time, update_time
+      )
+    values (#{alarmId,jdbcType=VARCHAR}, #{clearId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{globalCode,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, #{resType,jdbcType=INTEGER}, 
+      #{resTypeName,jdbcType=VARCHAR}, #{eqpType,jdbcType=INTEGER}, #{eqpTypeName,jdbcType=VARCHAR}, 
+      #{faultType,jdbcType=VARCHAR}, #{crackingType,jdbcType=VARCHAR}, #{alarmStatus,jdbcType=INTEGER}, 
+      #{eventTime,jdbcType=TIMESTAMP}, #{clearTime,jdbcType=TIMESTAMP}, #{alarmType,jdbcType=INTEGER}, 
+      #{alarmSource,jdbcType=INTEGER}, #{alarmLevel,jdbcType=INTEGER}, #{alarmTitle,jdbcType=VARCHAR}, 
+      #{alarmTitleType,jdbcType=INTEGER}, #{alarmText,jdbcType=VARCHAR}, #{alarmTextType,jdbcType=INTEGER}, 
+      #{alarmImage,jdbcType=VARCHAR}, #{facilityName,jdbcType=VARCHAR}, #{facilityFrim,jdbcType=VARCHAR}, 
+      #{eqpCode,jdbcType=VARCHAR}, #{assetNumber,jdbcType=VARCHAR}, #{policeId,jdbcType=INTEGER}, 
+      #{policeStation,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, 
+      #{portCode,jdbcType=VARCHAR}, #{diagnoseResult,jdbcType=VARCHAR}, #{planType,jdbcType=INTEGER}, 
+      #{parentId,jdbcType=VARCHAR}, #{ackStatus,jdbcType=INTEGER}, #{confirmTime,jdbcType=TIMESTAMP}, 
+      #{confirmUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.stt.smartmonitor.entity.AlarmData" >
+    insert into alarm_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="alarmId != null" >
+        alarm_id,
+      </if>
+      <if test="clearId != null" >
+        clear_id,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="globalCode != null" >
+        global_code,
+      </if>
+      <if test="itemName != null" >
+        item_name,
+      </if>
+      <if test="resType != null" >
+        res_type,
+      </if>
+      <if test="resTypeName != null" >
+        res_type_name,
+      </if>
+      <if test="eqpType != null" >
+        eqp_type,
+      </if>
+      <if test="eqpTypeName != null" >
+        eqp_type_name,
+      </if>
+      <if test="faultType != null" >
+        fault_type,
+      </if>
+      <if test="crackingType != null" >
+        cracking_type,
+      </if>
+      <if test="alarmStatus != null" >
+        alarm_status,
+      </if>
+      <if test="eventTime != null" >
+        event_time,
+      </if>
+      <if test="clearTime != null" >
+        clear_time,
+      </if>
+      <if test="alarmType != null" >
+        alarm_type,
+      </if>
+      <if test="alarmSource != null" >
+        alarm_source,
+      </if>
+      <if test="alarmLevel != null" >
+        alarm_level,
+      </if>
+      <if test="alarmTitle != null" >
+        alarm_title,
+      </if>
+      <if test="alarmTitleType != null" >
+        alarm_title_type,
+      </if>
+      <if test="alarmText != null" >
+        alarm_text,
+      </if>
+      <if test="alarmTextType != null" >
+        alarm_text_type,
+      </if>
+      <if test="alarmImage != null" >
+        alarm_image,
+      </if>
+      <if test="facilityName != null" >
+        facility_name,
+      </if>
+      <if test="facilityFrim != null" >
+        facility_frim,
+      </if>
+      <if test="eqpCode != null" >
+        eqp_code,
+      </if>
+      <if test="assetNumber != null" >
+        asset_number,
+      </if>
+      <if test="policeId != null" >
+        police_id,
+      </if>
+      <if test="policeStation != null" >
+        police_station,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="portCode != null" >
+        port_code,
+      </if>
+      <if test="diagnoseResult != null" >
+        diagnose_result,
+      </if>
+      <if test="planType != null" >
+        plan_type,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="ackStatus != null" >
+        ack_status,
+      </if>
+      <if test="confirmTime != null" >
+        confirm_time,
+      </if>
+      <if test="confirmUser != null" >
+        confirm_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="alarmId != null" >
+        #{alarmId,jdbcType=VARCHAR},
+      </if>
+      <if test="clearId != null" >
+        #{clearId,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="globalCode != null" >
+        #{globalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null" >
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="resType != null" >
+        #{resType,jdbcType=INTEGER},
+      </if>
+      <if test="resTypeName != null" >
+        #{resTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="eqpType != null" >
+        #{eqpType,jdbcType=INTEGER},
+      </if>
+      <if test="eqpTypeName != null" >
+        #{eqpTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="faultType != null" >
+        #{faultType,jdbcType=VARCHAR},
+      </if>
+      <if test="crackingType != null" >
+        #{crackingType,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmStatus != null" >
+        #{alarmStatus,jdbcType=INTEGER},
+      </if>
+      <if test="eventTime != null" >
+        #{eventTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clearTime != null" >
+        #{clearTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alarmType != null" >
+        #{alarmType,jdbcType=INTEGER},
+      </if>
+      <if test="alarmSource != null" >
+        #{alarmSource,jdbcType=INTEGER},
+      </if>
+      <if test="alarmLevel != null" >
+        #{alarmLevel,jdbcType=INTEGER},
+      </if>
+      <if test="alarmTitle != null" >
+        #{alarmTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmTitleType != null" >
+        #{alarmTitleType,jdbcType=INTEGER},
+      </if>
+      <if test="alarmText != null" >
+        #{alarmText,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmTextType != null" >
+        #{alarmTextType,jdbcType=INTEGER},
+      </if>
+      <if test="alarmImage != null" >
+        #{alarmImage,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityName != null" >
+        #{facilityName,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityFrim != null" >
+        #{facilityFrim,jdbcType=VARCHAR},
+      </if>
+      <if test="eqpCode != null" >
+        #{eqpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="assetNumber != null" >
+        #{assetNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="policeId != null" >
+        #{policeId,jdbcType=INTEGER},
+      </if>
+      <if test="policeStation != null" >
+        #{policeStation,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="portCode != null" >
+        #{portCode,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnoseResult != null" >
+        #{diagnoseResult,jdbcType=VARCHAR},
+      </if>
+      <if test="planType != null" >
+        #{planType,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="ackStatus != null" >
+        #{ackStatus,jdbcType=INTEGER},
+      </if>
+      <if test="confirmTime != null" >
+        #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmUser != null" >
+        #{confirmUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.stt.smartmonitor.entity.AlarmData" >
+    update alarm_data
+    <set >
+      <if test="clearId != null" >
+        clear_id = #{clearId,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="globalCode != null" >
+        global_code = #{globalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null" >
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="resType != null" >
+        res_type = #{resType,jdbcType=INTEGER},
+      </if>
+      <if test="resTypeName != null" >
+        res_type_name = #{resTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="eqpType != null" >
+        eqp_type = #{eqpType,jdbcType=INTEGER},
+      </if>
+      <if test="eqpTypeName != null" >
+        eqp_type_name = #{eqpTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="faultType != null" >
+        fault_type = #{faultType,jdbcType=VARCHAR},
+      </if>
+      <if test="crackingType != null" >
+        cracking_type = #{crackingType,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmStatus != null" >
+        alarm_status = #{alarmStatus,jdbcType=INTEGER},
+      </if>
+      <if test="eventTime != null" >
+        event_time = #{eventTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clearTime != null" >
+        clear_time = #{clearTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alarmType != null" >
+        alarm_type = #{alarmType,jdbcType=INTEGER},
+      </if>
+      <if test="alarmSource != null" >
+        alarm_source = #{alarmSource,jdbcType=INTEGER},
+      </if>
+      <if test="alarmLevel != null" >
+        alarm_level = #{alarmLevel,jdbcType=INTEGER},
+      </if>
+      <if test="alarmTitle != null" >
+        alarm_title = #{alarmTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmTitleType != null" >
+        alarm_title_type = #{alarmTitleType,jdbcType=INTEGER},
+      </if>
+      <if test="alarmText != null" >
+        alarm_text = #{alarmText,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmTextType != null" >
+        alarm_text_type = #{alarmTextType,jdbcType=INTEGER},
+      </if>
+      <if test="alarmImage != null" >
+        alarm_image = #{alarmImage,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityName != null" >
+        facility_name = #{facilityName,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityFrim != null" >
+        facility_frim = #{facilityFrim,jdbcType=VARCHAR},
+      </if>
+      <if test="eqpCode != null" >
+        eqp_code = #{eqpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="assetNumber != null" >
+        asset_number = #{assetNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="policeId != null" >
+        police_id = #{policeId,jdbcType=INTEGER},
+      </if>
+      <if test="policeStation != null" >
+        police_station = #{policeStation,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="portCode != null" >
+        port_code = #{portCode,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnoseResult != null" >
+        diagnose_result = #{diagnoseResult,jdbcType=VARCHAR},
+      </if>
+      <if test="planType != null" >
+        plan_type = #{planType,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="ackStatus != null" >
+        ack_status = #{ackStatus,jdbcType=INTEGER},
+      </if>
+      <if test="confirmTime != null" >
+        confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmUser != null" >
+        confirm_user = #{confirmUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where alarm_id = #{alarmId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.stt.smartmonitor.entity.AlarmData" >
+    update alarm_data
+    set clear_id = #{clearId,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      global_code = #{globalCode,jdbcType=VARCHAR},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      res_type = #{resType,jdbcType=INTEGER},
+      res_type_name = #{resTypeName,jdbcType=VARCHAR},
+      eqp_type = #{eqpType,jdbcType=INTEGER},
+      eqp_type_name = #{eqpTypeName,jdbcType=VARCHAR},
+      fault_type = #{faultType,jdbcType=VARCHAR},
+      cracking_type = #{crackingType,jdbcType=VARCHAR},
+      alarm_status = #{alarmStatus,jdbcType=INTEGER},
+      event_time = #{eventTime,jdbcType=TIMESTAMP},
+      clear_time = #{clearTime,jdbcType=TIMESTAMP},
+      alarm_type = #{alarmType,jdbcType=INTEGER},
+      alarm_source = #{alarmSource,jdbcType=INTEGER},
+      alarm_level = #{alarmLevel,jdbcType=INTEGER},
+      alarm_title = #{alarmTitle,jdbcType=VARCHAR},
+      alarm_title_type = #{alarmTitleType,jdbcType=INTEGER},
+      alarm_text = #{alarmText,jdbcType=VARCHAR},
+      alarm_text_type = #{alarmTextType,jdbcType=INTEGER},
+      alarm_image = #{alarmImage,jdbcType=VARCHAR},
+      facility_name = #{facilityName,jdbcType=VARCHAR},
+      facility_frim = #{facilityFrim,jdbcType=VARCHAR},
+      eqp_code = #{eqpCode,jdbcType=VARCHAR},
+      asset_number = #{assetNumber,jdbcType=VARCHAR},
+      police_id = #{policeId,jdbcType=INTEGER},
+      police_station = #{policeStation,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      port_code = #{portCode,jdbcType=VARCHAR},
+      diagnose_result = #{diagnoseResult,jdbcType=VARCHAR},
+      plan_type = #{planType,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      ack_status = #{ackStatus,jdbcType=INTEGER},
+      confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      confirm_user = #{confirmUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where alarm_id = #{alarmId,jdbcType=VARCHAR}
+  </update>
+</mapper>

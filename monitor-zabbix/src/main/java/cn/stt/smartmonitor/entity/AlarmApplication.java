@@ -5,7 +5,7 @@ import java.util.Date;
 public class AlarmApplication {
     private Integer id;
 
-    private Integer alarmGroupId;
+    private String groupName;
 
     private String applicationName;
 
@@ -31,12 +31,12 @@ public class AlarmApplication {
         this.id = id;
     }
 
-    public Integer getAlarmGroupId() {
-        return alarmGroupId;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setAlarmGroupId(Integer alarmGroupId) {
-        this.alarmGroupId = alarmGroupId;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName == null ? null : groupName.trim();
     }
 
     public String getApplicationName() {

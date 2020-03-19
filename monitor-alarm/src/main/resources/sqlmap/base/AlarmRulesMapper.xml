@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stt.smartmonitor.mapper.base.AlarmRulesMapper">
+  <resultMap id="BaseResultMap" type="cn.stt.smartmonitor.entity.AlarmRules">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="rule_name" jdbcType="VARCHAR" property="ruleName" />
+    <result column="res_type" jdbcType="INTEGER" property="resType" />
+    <result column="res_type_name" jdbcType="VARCHAR" property="resTypeName" />
+    <result column="eqp_type" jdbcType="INTEGER" property="eqpType" />
+    <result column="eqp_type_name" jdbcType="VARCHAR" property="eqpTypeName" />
+    <result column="performance_id" jdbcType="INTEGER" property="performanceId" />
+    <result column="performance_name" jdbcType="VARCHAR" property="performanceName" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="threshold_status" jdbcType="INTEGER" property="thresholdStatus" />
+    <result column="lower_threshold" jdbcType="INTEGER" property="lowerThreshold" />
+    <result column="threshold" jdbcType="INTEGER" property="threshold" />
+    <result column="alarm_level" jdbcType="INTEGER" property="alarmLevel" />
+    <result column="send_status" jdbcType="INTEGER" property="sendStatus" />
+    <result column="use_status" jdbcType="INTEGER" property="useStatus" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="recent_time" jdbcType="TIMESTAMP" property="recentTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="alarm_count" jdbcType="INTEGER" property="alarmCount" />
+    <result column="clear_count" jdbcType="INTEGER" property="clearCount" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, rule_name, res_type, res_type_name, eqp_type, eqp_type_name, performance_id, 
+    performance_name, item_name, threshold_status, lower_threshold, threshold, alarm_level, 
+    send_status, use_status, start_time, end_time, recent_time, description, alarm_count, 
+    clear_count, remark, sort, status, create_by, create_time, update_by, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from alarm_rules
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from alarm_rules
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.stt.smartmonitor.entity.AlarmRules">
+    insert into alarm_rules (id, rule_name, res_type, 
+      res_type_name, eqp_type, eqp_type_name, 
+      performance_id, performance_name, item_name, 
+      threshold_status, lower_threshold, threshold, 
+      alarm_level, send_status, use_status, 
+      start_time, end_time, recent_time, 
+      description, alarm_count, clear_count, 
+      remark, sort, status, 
+      create_by, create_time, update_by, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{ruleName,jdbcType=VARCHAR}, #{resType,jdbcType=INTEGER}, 
+      #{resTypeName,jdbcType=VARCHAR}, #{eqpType,jdbcType=INTEGER}, #{eqpTypeName,jdbcType=VARCHAR}, 
+      #{performanceId,jdbcType=INTEGER}, #{performanceName,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, 
+      #{thresholdStatus,jdbcType=INTEGER}, #{lowerThreshold,jdbcType=INTEGER}, #{threshold,jdbcType=INTEGER}, 
+      #{alarmLevel,jdbcType=INTEGER}, #{sendStatus,jdbcType=INTEGER}, #{useStatus,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{recentTime,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=VARCHAR}, #{alarmCount,jdbcType=INTEGER}, #{clearCount,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.stt.smartmonitor.entity.AlarmRules">
+    insert into alarm_rules
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ruleName != null">
+        rule_name,
+      </if>
+      <if test="resType != null">
+        res_type,
+      </if>
+      <if test="resTypeName != null">
+        res_type_name,
+      </if>
+      <if test="eqpType != null">
+        eqp_type,
+      </if>
+      <if test="eqpTypeName != null">
+        eqp_type_name,
+      </if>
+      <if test="performanceId != null">
+        performance_id,
+      </if>
+      <if test="performanceName != null">
+        performance_name,
+      </if>
+      <if test="itemName != null">
+        item_name,
+      </if>
+      <if test="thresholdStatus != null">
+        threshold_status,
+      </if>
+      <if test="lowerThreshold != null">
+        lower_threshold,
+      </if>
+      <if test="threshold != null">
+        threshold,
+      </if>
+      <if test="alarmLevel != null">
+        alarm_level,
+      </if>
+      <if test="sendStatus != null">
+        send_status,
+      </if>
+      <if test="useStatus != null">
+        use_status,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="recentTime != null">
+        recent_time,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="alarmCount != null">
+        alarm_count,
+      </if>
+      <if test="clearCount != null">
+        clear_count,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ruleName != null">
+        #{ruleName,jdbcType=VARCHAR},
+      </if>
+      <if test="resType != null">
+        #{resType,jdbcType=INTEGER},
+      </if>
+      <if test="resTypeName != null">
+        #{resTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="eqpType != null">
+        #{eqpType,jdbcType=INTEGER},
+      </if>
+      <if test="eqpTypeName != null">
+        #{eqpTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="performanceId != null">
+        #{performanceId,jdbcType=INTEGER},
+      </if>
+      <if test="performanceName != null">
+        #{performanceName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null">
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="thresholdStatus != null">
+        #{thresholdStatus,jdbcType=INTEGER},
+      </if>
+      <if test="lowerThreshold != null">
+        #{lowerThreshold,jdbcType=INTEGER},
+      </if>
+      <if test="threshold != null">
+        #{threshold,jdbcType=INTEGER},
+      </if>
+      <if test="alarmLevel != null">
+        #{alarmLevel,jdbcType=INTEGER},
+      </if>
+      <if test="sendStatus != null">
+        #{sendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="useStatus != null">
+        #{useStatus,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recentTime != null">
+        #{recentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmCount != null">
+        #{alarmCount,jdbcType=INTEGER},
+      </if>
+      <if test="clearCount != null">
+        #{clearCount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.stt.smartmonitor.entity.AlarmRules">
+    update alarm_rules
+    <set>
+      <if test="ruleName != null">
+        rule_name = #{ruleName,jdbcType=VARCHAR},
+      </if>
+      <if test="resType != null">
+        res_type = #{resType,jdbcType=INTEGER},
+      </if>
+      <if test="resTypeName != null">
+        res_type_name = #{resTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="eqpType != null">
+        eqp_type = #{eqpType,jdbcType=INTEGER},
+      </if>
+      <if test="eqpTypeName != null">
+        eqp_type_name = #{eqpTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="performanceId != null">
+        performance_id = #{performanceId,jdbcType=INTEGER},
+      </if>
+      <if test="performanceName != null">
+        performance_name = #{performanceName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null">
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="thresholdStatus != null">
+        threshold_status = #{thresholdStatus,jdbcType=INTEGER},
+      </if>
+      <if test="lowerThreshold != null">
+        lower_threshold = #{lowerThreshold,jdbcType=INTEGER},
+      </if>
+      <if test="threshold != null">
+        threshold = #{threshold,jdbcType=INTEGER},
+      </if>
+      <if test="alarmLevel != null">
+        alarm_level = #{alarmLevel,jdbcType=INTEGER},
+      </if>
+      <if test="sendStatus != null">
+        send_status = #{sendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="useStatus != null">
+        use_status = #{useStatus,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recentTime != null">
+        recent_time = #{recentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmCount != null">
+        alarm_count = #{alarmCount,jdbcType=INTEGER},
+      </if>
+      <if test="clearCount != null">
+        clear_count = #{clearCount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.stt.smartmonitor.entity.AlarmRules">
+    update alarm_rules
+    set rule_name = #{ruleName,jdbcType=VARCHAR},
+      res_type = #{resType,jdbcType=INTEGER},
+      res_type_name = #{resTypeName,jdbcType=VARCHAR},
+      eqp_type = #{eqpType,jdbcType=INTEGER},
+      eqp_type_name = #{eqpTypeName,jdbcType=VARCHAR},
+      performance_id = #{performanceId,jdbcType=INTEGER},
+      performance_name = #{performanceName,jdbcType=VARCHAR},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      threshold_status = #{thresholdStatus,jdbcType=INTEGER},
+      lower_threshold = #{lowerThreshold,jdbcType=INTEGER},
+      threshold = #{threshold,jdbcType=INTEGER},
+      alarm_level = #{alarmLevel,jdbcType=INTEGER},
+      send_status = #{sendStatus,jdbcType=INTEGER},
+      use_status = #{useStatus,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      recent_time = #{recentTime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=VARCHAR},
+      alarm_count = #{alarmCount,jdbcType=INTEGER},
+      clear_count = #{clearCount,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

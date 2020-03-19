@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.stt.smartmonitor.mapper.AlarmDataMapperExt" >
+  <resultMap id="BaseResultMap" type="cn.stt.smartmonitor.entity.AlarmData">
+    <id column="alarm_id" jdbcType="VARCHAR" property="alarmId" />
+    <result column="clear_id" jdbcType="VARCHAR" property="clearId" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="global_code" jdbcType="VARCHAR" property="globalCode" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="res_type" jdbcType="INTEGER" property="resType" />
+    <result column="res_type_name" jdbcType="VARCHAR" property="resTypeName" />
+    <result column="eqp_type" jdbcType="INTEGER" property="eqpType" />
+    <result column="eqp_type_name" jdbcType="VARCHAR" property="eqpTypeName" />
+    <result column="fault_type" jdbcType="VARCHAR" property="faultType" />
+    <result column="cracking_type" jdbcType="VARCHAR" property="crackingType" />
+    <result column="alarm_status" jdbcType="INTEGER" property="alarmStatus" />
+    <result column="event_time" jdbcType="TIMESTAMP" property="eventTime" />
+    <result column="clear_time" jdbcType="TIMESTAMP" property="clearTime" />
+    <result column="alarm_type" jdbcType="INTEGER" property="alarmType" />
+    <result column="alarm_source" jdbcType="INTEGER" property="alarmSource" />
+    <result column="alarm_level" jdbcType="INTEGER" property="alarmLevel" />
+    <result column="alarm_title" jdbcType="VARCHAR" property="alarmTitle" />
+    <result column="alarm_title_type" jdbcType="INTEGER" property="alarmTitleType" />
+    <result column="alarm_text" jdbcType="VARCHAR" property="alarmText" />
+    <result column="alarm_text_type" jdbcType="INTEGER" property="alarmTextType" />
+    <result column="alarm_image" jdbcType="VARCHAR" property="alarmImage" />
+    <result column="facility_name" jdbcType="VARCHAR" property="facilityName" />
+    <result column="facility_frim" jdbcType="VARCHAR" property="facilityFrim" />
+    <result column="eqp_code" jdbcType="VARCHAR" property="eqpCode" />
+    <result column="asset_number" jdbcType="VARCHAR" property="assetNumber" />
+    <result column="police_id" jdbcType="INTEGER" property="policeId" />
+    <result column="police_station" jdbcType="VARCHAR" property="policeStation" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="mac" jdbcType="VARCHAR" property="mac" />
+    <result column="port_code" jdbcType="VARCHAR" property="portCode" />
+    <result column="diagnose_result" jdbcType="VARCHAR" property="diagnoseResult" />
+    <result column="plan_type" jdbcType="INTEGER" property="planType" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="ack_status" jdbcType="INTEGER" property="ackStatus" />
+    <result column="confirm_time" jdbcType="TIMESTAMP" property="confirmTime" />
+    <result column="confirm_user" jdbcType="VARCHAR" property="confirmUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    alarm_id, clear_id, ip, global_code, item_name, res_type, res_type_name, eqp_type,
+    eqp_type_name, fault_type, cracking_type, alarm_status, event_time, clear_time, alarm_type,
+    alarm_source, alarm_level, alarm_title, alarm_title_type, alarm_text, alarm_text_type,
+    alarm_image, facility_name, facility_frim, eqp_code, asset_number, police_id, police_station,
+    location, mac, port_code, diagnose_result, plan_type, parent_id, ack_status, confirm_time,
+    confirm_user, create_time, update_time
+  </sql>
+  <select id="findActivityUnique" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from alarm_data
+    where alarm_status=0
+    <if test="ip !=null">
+      and ip=#{ip}
+    </if>
+    <if test="itemName !=null">
+      and item_name=#{itemName}
+    </if>
+    <if test="portCode !=null">
+      and port_code=#{portCode}
+    </if>
+  </select>
+</mapper>

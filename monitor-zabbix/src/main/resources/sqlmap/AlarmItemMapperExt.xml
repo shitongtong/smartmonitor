@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.stt.smartmonitor.mapper.AlarmItemMapperExt" >
-  <resultMap id="BaseResultMap" type="cn.stt.smartmonitor.entity.AlarmItem" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="alarm_application_id" property="alarmApplicationId" jdbcType="INTEGER" />
-    <result column="item_key" property="itemKey" jdbcType="VARCHAR" />
-    <result column="item_name" property="itemName" jdbcType="VARCHAR" />
-    <result column="item_type" property="itemType" jdbcType="VARCHAR" />
-    <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="sort" property="sort" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  <resultMap id="BaseResultMap" type="cn.stt.smartmonitor.entity.AlarmItem">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="application_name" jdbcType="VARCHAR" property="applicationName" />
+    <result column="item_key" jdbcType="VARCHAR" property="itemKey" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="item_type" jdbcType="VARCHAR" property="itemType" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, alarm_application_id, item_key, item_name, item_type, remark, sort, status, create_by, 
+  <sql id="Base_Column_List">
+    id, application_name, item_key, item_name, item_type, remark, sort, status, create_by,
     create_time, update_by, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="findByApplicationName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from alarm_item
-    where id = #{id,jdbcType=INTEGER}
+    where status=1 and application_name = #{applicationName}
   </select>
 </mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.stt.smartmonitor.mapper.AlarmDataMapperExt" >
+  <resultMap id="BaseResultMap" type="cn.stt.smartmonitor.entity.AlarmData" >
+    <id column="alarm_id" property="alarmId" jdbcType="VARCHAR" />
+    <result column="clear_id" property="clearId" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="global_code" property="globalCode" jdbcType="VARCHAR" />
+    <result column="item_name" property="itemName" jdbcType="VARCHAR" />
+    <result column="res_type" property="resType" jdbcType="INTEGER" />
+    <result column="res_type_name" property="resTypeName" jdbcType="VARCHAR" />
+    <result column="eqp_type" property="eqpType" jdbcType="INTEGER" />
+    <result column="eqp_type_name" property="eqpTypeName" jdbcType="VARCHAR" />
+    <result column="fault_type" property="faultType" jdbcType="VARCHAR" />
+    <result column="cracking_type" property="crackingType" jdbcType="VARCHAR" />
+    <result column="alarm_status" property="alarmStatus" jdbcType="INTEGER" />
+    <result column="event_time" property="eventTime" jdbcType="TIMESTAMP" />
+    <result column="clear_time" property="clearTime" jdbcType="TIMESTAMP" />
+    <result column="alarm_type" property="alarmType" jdbcType="INTEGER" />
+    <result column="alarm_source" property="alarmSource" jdbcType="INTEGER" />
+    <result column="alarm_level" property="alarmLevel" jdbcType="INTEGER" />
+    <result column="alarm_title" property="alarmTitle" jdbcType="VARCHAR" />
+    <result column="alarm_title_type" property="alarmTitleType" jdbcType="INTEGER" />
+    <result column="alarm_text" property="alarmText" jdbcType="VARCHAR" />
+    <result column="alarm_text_type" property="alarmTextType" jdbcType="INTEGER" />
+    <result column="alarm_image" property="alarmImage" jdbcType="VARCHAR" />
+    <result column="facility_name" property="facilityName" jdbcType="VARCHAR" />
+    <result column="facility_frim" property="facilityFrim" jdbcType="VARCHAR" />
+    <result column="eqp_code" property="eqpCode" jdbcType="VARCHAR" />
+    <result column="asset_number" property="assetNumber" jdbcType="VARCHAR" />
+    <result column="police_id" property="policeId" jdbcType="INTEGER" />
+    <result column="police_station" property="policeStation" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="port_code" property="portCode" jdbcType="VARCHAR" />
+    <result column="diagnose_result" property="diagnoseResult" jdbcType="VARCHAR" />
+    <result column="plan_type" property="planType" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="ack_status" property="ackStatus" jdbcType="INTEGER" />
+    <result column="confirm_time" property="confirmTime" jdbcType="TIMESTAMP" />
+    <result column="confirm_user" property="confirmUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    alarm_id, clear_id, ip, global_code, item_name, res_type, res_type_name, eqp_type, 
+    eqp_type_name, fault_type, cracking_type, alarm_status, event_time, clear_time, alarm_type, 
+    alarm_source, alarm_level, alarm_title, alarm_title_type, alarm_text, alarm_text_type, 
+    alarm_image, facility_name, facility_frim, eqp_code, asset_number, police_id, police_station, 
+    location, mac, port_code, diagnose_result, plan_type, parent_id, ack_status, confirm_time, 
+    confirm_user, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from alarm_data
+    where alarm_id = #{alarmId,jdbcType=VARCHAR}
+  </select>
+</mapper>

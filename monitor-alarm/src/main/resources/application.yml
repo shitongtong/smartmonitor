@@ -1,0 +1,67 @@
+server:
+  servlet:
+    context-path: /monitor-alarm
+  port: 20008
+
+#日志配置
+logging:
+  config: classpath:logback.xml
+  level:
+    cn.stt.smartmonitor.mapper: debug
+
+mybatis:
+  mapper-locations: classpath:sqlmap/*.xml
+  type-aliases-package: cn.stt.smartmonitor.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+spring:
+  application:
+    name: monitor-zabbix
+  profiles:
+      active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      allow-pool-suspension: true
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  cache:
+        type: redis
+  redis:
+    database: 0
+    timeout: 100000
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+    password: xxx
+
+jedis: true
+
+
+---
+# 本地测试环境
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/znjk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  redis:
+    host: localhost
+
+
+#自定义配置
+my:
+  alarmHandUrl: http://localhost:10176/monitor-order/order/handAlarmData
+
+

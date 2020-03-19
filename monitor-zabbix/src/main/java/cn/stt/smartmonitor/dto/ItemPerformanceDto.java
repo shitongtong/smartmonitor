@@ -18,5 +18,5 @@ public class ItemPerformanceDto {
     /**
      * 指标性能数据,key:指标名称 value:指标值
      */
-    private Map<String, Object> performance;
+    private Map<String, String> performance;
 }
