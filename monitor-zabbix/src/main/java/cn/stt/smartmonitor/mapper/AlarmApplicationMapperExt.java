@@ -1,5 +1,7 @@
 package cn.stt.smartmonitor.mapper;
 
+import cn.stt.smartmonitor.mapper.base.AlarmApplicationMapper;
+
 import java.util.List;
 
 /**

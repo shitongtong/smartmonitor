@@ -1,4 +1,4 @@
-package cn.stt.smartmonitor.mapper;
+package cn.stt.smartmonitor.mapper.base;
 
 import cn.stt.smartmonitor.entity.AlarmGroup;
 

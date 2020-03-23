@@ -6,7 +6,6 @@
     <result column="application_name" jdbcType="VARCHAR" property="applicationName" />
     <result column="item_key" jdbcType="VARCHAR" property="itemKey" />
     <result column="item_name" jdbcType="VARCHAR" property="itemName" />
-    <result column="item_type" jdbcType="VARCHAR" property="itemType" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="status" jdbcType="INTEGER" property="status" />
@@ -16,8 +15,8 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, application_name, item_key, item_name, item_type, remark, sort, status, create_by,
-    create_time, update_by, update_time
+    id, application_name, item_key, item_name, remark, sort, status, create_by, create_time,
+    update_by, update_time
   </sql>
   <select id="findByApplicationName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
